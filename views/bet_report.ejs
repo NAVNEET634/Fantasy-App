@@ -1,0 +1,176 @@
+<%- include ('./adminheader.ejs') %>
+
+
+<!--InsertDiv-->
+
+
+  <div class="container-fluid mt--7">
+      <div id="insertdiv">
+    <div class="row">
+      <div class="col-xl-12 order-xl-1">
+        <div class="card bg-default shadow">
+            <div class="card-header bg-default border-0">
+                <div class="row align-items-center">
+                  <div class="col-8">
+                    <h3 class="mb-0" style="color:white">Bet Report</h3>
+                  </div>
+                
+                </div>
+              </div>
+              
+              <div class="card bg-default shadow">
+            
+           
+          
+          
+                <div class="table-responsive">
+                  <table class="table align-items-center table-dark table-flush">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col"> Match</th>
+
+                        <th scope="col">Your Team</th>
+                        <th scope="col">Hold</th>
+                        <th scope="col">Amount</th>
+
+                      
+                      
+                        <th scope="col">Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                          <tr>
+                         <% for(i=0;i<result.length;i++){ %>
+
+                            <th scope="row">
+                                <div class="media align-items-center">
+                                  <div class="media-body">
+                                    <span class="mb-0 text-sm"><%=result[i].team1name%> vs <%=result[i].team2name%></span>
+                                  </div>
+                                </div>
+                              </th>
+  
+
+
+                              <th scope="row">
+                                <div class="media align-items-center">
+                                  <div class="media-body">
+                                    <span class="mb-0 text-sm"><%=result[i].selectedteam%></span>
+                                  </div>
+                                </div>
+                              </th>
+
+
+                              <th scope="row">
+                                <div class="media align-items-center">
+                                  <div class="media-body">
+                                    <span class="mb-0 text-sm"><%=result[i].hold%></span>
+                                  </div>
+                                </div>
+                              </th>
+
+
+                              <th scope="row">
+                                <div class="media align-items-center">
+                                  <div class="media-body">
+                                    <span class="mb-0 text-sm"><%=result[i].hold * result[i].entry_fee %></span>
+                                  </div>
+                                </div>
+                              </th>
+  
+
+
+                           
+
+                          
+        
+        
+                              <th scope="row">
+                                <div class="media align-items-center">
+                                  <div class="media-body">
+                                    <span class="mb-0 text-sm"><%=result[i].matchdate%> <%=result[i].matchtime%></span>
+                                  </div>
+                                </div>
+                              </th>
+        
+                        
+                          
+                          </tr>
+                         <%  } %>
+                          
+                    </tbody>
+                      </table>
+                    </div>
+                  </div>
+      </div>
+    </div>
+ </div>
+</div>
+
+<!--End InsertDiv-->
+
+
+
+<!--UpdateImageDiv Start-->
+
+      </div>
+  
+  
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="row align-items-center justify-content-xl-between">
+          <div class="col-xl-6">
+            
+          </div>
+        
+        </div>
+      </footer>
+    </div>
+  </div>
+  <!-- Argon Scripts -->
+  <!-- Core -->
+  <script src="/admin/assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="/admin/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Argon JS -->
+  <script src="/admin/assets/js/argon.js?v=1.0.0"></script>
+  
+  <script type="text/javascript" src="/javascripts/matches.js"></script>
+
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+<script>
+$('.uploadImage').submit(function(e){
+    e.preventDefault();
+     $(this).ajaxSubmit({
+      contentType: 'application/json',
+      success: function(response){
+     alert("Successfully")
+    
+      
+      }
+  });
+    return false;
+});
+$('.wining').click(function(){
+ let teamid = $(this).attr('id');
+  let matchid = $(this).attr('matchid')
+  let teamname = $(this).attr('teamname')
+  var r = confirm(`Are you sure ${teamname} win this match?`);
+  if (r == true) {
+  $.post('/admin/bet-amount-send',{teamid,matchid},data=>{
+    alert('Send Successfully')
+  })
+  } else {
+    
+  }
+})
+</script>
+
+
+
+
+</body>
+
+</html>

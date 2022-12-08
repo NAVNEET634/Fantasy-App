@@ -1,0 +1,307 @@
+
+
+<%- include ('./adminheader.ejs') %>
+
+
+    <!-- Header -->
+    
+    <!-- Page content -->
+    <div class="container-fluid mt--6">
+      <div class="row">
+        <div class="col-xl-4 order-xl-2">
+          <div class="card card-profile">
+            <img src="/images/<%=result[0].pancard%>" alt="Image placeholder" class="card-img-top">
+            
+          
+            <div class="card-body pt-0">
+            <p style="margin-top:10px;font-weight:bold">PAN CARD</p>
+             
+            </div>
+          </div>
+      
+
+          <div class="card card-profile" style="margin-top: 20px;">
+          <a href="/users/deposit/report?number=<%=result[0].number%>"><button type="button" class="btn btn-primary" style="margin-left: 15px;margin-top: 10px;width: 90%;">Deposit Report</button> </a>
+          <a href="/users/withdrawl/report?number=<%=result[0].number%>"> <button type="button" class="btn btn-primary" style="margin-left: 15px;margin-top: 10px;width: 90%;">Withdrawl Report</button> </a>
+          <a href="/users/transaction/report?number=<%=result[0].number%>"> <button type="button" class="btn btn-primary" style="margin-left: 15px;margin-top: 10px;width: 90%;">Transaction Report</button> </a>
+          <a href="/users/contests/report?number=<%=result[0].number%>">  <button type="button" class="btn btn-primary" style="margin-left: 15px;margin-top: 10px;width: 90%;">Contests Report</button> </a>
+          <a href="/users/bet/report?number=<%=result[0].number%>">  <button type="button" class="btn btn-primary" style="margin-left: 15px;margin-top: 10px;width: 90%;">Bet Report</button> </a>
+
+
+            <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+             
+            </div>
+            <div class="card-body pt-0">
+            
+           
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-8 order-xl-1">
+          <div class="card">
+            <div class="card-header">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h3 class="mb-0">Edit profile </h3>
+                </div>
+                <div class="col-4 text-right">
+                  <a href="#!" class="btn btn-sm btn-primary update_details" id="<%=result[0].id%>">Update Details</a>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <form>
+                <h6 class="heading-small text-muted mb-4">User information</h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-username">Username</label>
+                        <input type="text" id="input-username" class="form-control" placeholder="Username" value="<%=result[0].name%>">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-email">Email address</label>
+                        <input type="email" id="input-email" class="form-control" value="<%=result[0].email%>">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-first-name">Mobile Number</label>
+                        <input type="text" id="input-number" class="form-control" placeholder="First name" value="<%=result[0].number%>" readonly>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-last-name">Unique Code</label>
+                        <input type="text" id="input-unique_code" class="form-control" value="<%=result[0].unique_code%>">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-first-name">Deposit Wallet</label>
+                        <input type="text" id="input-deposit_wallet" class="form-control" placeholder="First name" value="<%=result[0].deposit_cash%>">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-last-name">Withdrawl Amount</label>
+                        <input type="text" id="input-withdrawl_amount" class="form-control" value="<%=result[0].winning_amount%>">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr class="my-4" />
+                <!-- Address -->
+                <div class="row mb-4">
+                <div class="col-8">
+                    <h3 class="mb-0">KYC Details </h3>
+                  </div>
+                  <div class="col-4 text-right">
+
+<% if(result[0].pancard_status == 'approved') { %>
+  <a href="#!" class="btn btn-sm btn-success">Approved</a>
+
+
+  <% } else { %>
+                    <a href="#!" class="btn btn-sm btn-primary pan_card_approved" id="<%=result[0].id%>">Approved</a>
+                    <a href="#!" class="btn btn-sm btn-danger pan_card_reject" id="<%=result[0].id%>">Reject</a>
+<% } %>
+                  </div>
+                  </div>
+                <div class="pl-lg-4">
+                
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-city">PAN Name</label>
+                        <input type="text" id="input-city" class="form-control"  value="<%=result[0].pan_name%>">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-country">PAN Number</label>
+                        <input type="text" id="input-country" class="form-control"  value="<%=result[0].pan_number%>">
+                      </div>
+                    </div>
+               
+                  </div>
+                </div>
+                <hr class="my-4" />
+                <!-- Description -->
+
+                <div class="row mb-4">
+                    <div class="col-8">
+                        <h3 class="mb-0">Bank Details </h3>
+                      </div>
+                      <div class="col-4 text-right">
+
+<% if(result[0].bank_verification_status == 'approved') { %>
+
+  <a href="#!" class="btn btn-sm btn-success">Approved</a>
+
+
+  <% } else { %>
+
+                        <a href="#!" class="btn btn-sm btn-primary bank_details_approved" id="<%=result[0].id%>">Approved</a>
+                        <a href="#!" class="btn btn-sm btn-danger bank_details_reject" id="<%=result[0].id%>">Reject</a>
+    
+
+<% } %>
+
+                      </div>
+                      </div>
+
+                <div class="pl-lg-4">
+                    <div class="row">
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="input-city">Bank Name</label>
+                            <input type="text" id="input-city" class="form-control"  value="<%=result[0].bank_details%>">
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="input-country">IFSC Code</label>
+                            <input type="text" id="input-country" class="form-control"  value="<%=result[0].ifsc_code%>">
+                          </div>
+                        </div>
+                   
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="input-city">Account Number</label>
+                            <input type="text" id="input-city" class="form-control"  value="<%=result[0].account_number%>">
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="form-group">
+                            <label class="form-control-label" for="input-country">Account Holder Name</label>
+                            <input type="text" id="input-country" class="form-control"  value="<%=result[0].account_holder_name%>">
+                          </div>
+                        </div>
+                   
+                      </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      
+      <!-- Footer -->
+      <footer class="footer pt-0">
+     
+      </footer>
+    </div>
+  </div>
+  <!-- Argon Scripts -->
+  <!-- Core -->
+  <script src="/admin/assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="/admin/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/admin/assets/vendor/js-cookie/js.cookie.js"></script>
+  <script src="/admin/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+  <script src="/admin/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+  <!-- Argon JS -->
+  <script src="/admin/assets/js/argon.js?v=1.2.0"></script>
+</body>
+
+
+<script>
+  $('.bank_details_approved').click(function(){
+    let id = $(this).attr('id');
+    let bank_verification_status = 'approved'
+
+    $.post('/users/update',{id,bank_verification_status},data=>{
+      window.location.reload()
+    })
+  })
+
+
+
+  $('.bank_details_reject').click(function(){
+    let id = $(this).attr('id');
+    let bank_verification_status = 'reject'
+    let bank_reason = prompt("Give Feedback:");
+  if (bank_reason == null || bank_reason == "") {
+    text = "User cancelled the prompt.";
+  } else {
+    
+    $.post('/users/update',{id,bank_verification_status,bank_reason},data=>{
+      window.location.reload()
+    })
+  }
+
+  
+  })
+
+
+
+
+
+  $('.pan_card_approved').click(function(){
+    let id = $(this).attr('id');
+    let pancard_status = 'approved'
+
+    $.post('/users/update',{id,pancard_status},data=>{
+      window.location.reload()
+    })
+  })
+
+
+
+  $('.pan_card_reject').click(function(){
+    let id = $(this).attr('id');
+    let pancard_status = 'reject'
+    let pancard_reason   = prompt("Give Feedback:");
+  if (pancard_reason == null || pancard_reason == "") {
+    text = "User cancelled the prompt.";
+  } else {
+    
+    $.post('/users/update',{id,pancard_status,pancard_reason},data=>{
+      window.location.reload()
+    })
+  }
+
+  
+  })
+
+
+
+
+
+
+
+  $('.update_details').click(function(){
+  
+     let name = $('#input-username').val();
+     let email = $('#input-email').val();
+     let unique_code = $('#input-unique_code').val();
+     let deposit_cash = $('#input-deposit_wallet').val();
+     let winning_amount = $('#input-withdrawl_amount').val()
+     let id = $(this).attr('id');
+
+     $.post('/users/update',{id,name,email,unique_code,deposit_cash,winning_amount},data=>{
+       alert('Successfully Updated')
+      window.location.reload()
+    })
+
+
+
+  })
+
+
+
+
+</script>
+
+</html>
